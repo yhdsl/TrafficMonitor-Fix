@@ -1,0 +1,248 @@
+name: Bulid TrafficMonitor Release CI
+
+on:
+  push:
+  workflow_dispatch:
+
+jobs:
+  x64_build:
+    runs-on: windows-latest
+
+    steps:
+    - name: Checkout local translate
+      uses: actions/checkout@v3
+      with:
+        repository: 'yhdsl/TrafficMonitor-Fix'
+        path: './translate'
+  
+    - name: Checkout translator tool
+      uses: actions/checkout@v3
+      with:
+        repository: 'yhdsl/Translator-Tool'
+        path: './tool'
+
+    - name: Checkout TrafficMonitor source code
+      uses: actions/checkout@v3
+      with:
+        repository: 'zhongyang219/TrafficMonitor'
+        path: './traffic_monitor'
+
+    - name: Setup Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.10'
+
+    - name: Run translator tool
+      run: python ./tool/translator.py ./translate/rules -r "$(pwd)/traffic_monitor"
+
+    - name: Add msbuild to PATH
+      uses: microsoft/setup-msbuild@v1.1.3
+      
+    - name: Run msbuild
+      run: |
+         cp -r ./traffic_monitor/* .
+         msbuild -p:configuration=release -p:platform=x64 -p:platformToolset=v142
+
+    - name: Get current time
+      uses: josStorer/get-current-time@v2.0.2
+      id: current-time
+      with:
+        format: YYYYMMDD_HHmmss
+        utcOffset: "+08:00"
+      
+    - name : Upload artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: x64_${{ steps.current-time.outputs.formattedTime }}_TrafficMonitor
+        path: |
+          Bin/x64/Release/TrafficMonitor.exe
+          Bin/x64/Release/*.dll
+
+    - name : Upload pdb files
+      uses: actions/upload-artifact@v3
+      with:
+        name: x64_${{ steps.current-time.outputs.formattedTime }}_pdb
+        path: Bin/x64/Release/*.pdb
+
+  x64_lite_build:
+    runs-on: windows-latest
+
+    steps:
+    - name: Checkout local translate
+      uses: actions/checkout@v3
+      with:
+        repository: 'yhdsl/TrafficMonitor-Fix'
+        path: './translate'
+  
+    - name: Checkout translator tool
+      uses: actions/checkout@v3
+      with:
+        repository: 'yhdsl/Translator-Tool'
+        path: './tool'
+
+    - name: Checkout TrafficMonitor source code
+      uses: actions/checkout@v3
+      with:
+        repository: 'zhongyang219/TrafficMonitor'
+        path: './traffic_monitor'
+
+    - name: Setup Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.10'
+
+    - name: Run translator tool
+      run: python ./tool/translator.py ./translate/rules -r "$(pwd)/traffic_monitor"
+
+    - name: Copy build file
+      run: cp -r ./translate/TrafficMonitor/* ./traffic_monitor/
+
+    - name: Add msbuild to PATH
+      uses: microsoft/setup-msbuild@v1.1.3
+      
+    - name: Run msbuild
+      run: |
+         cp -r ./traffic_monitor/* .
+         msbuild -p:configuration="Release (lite)" -p:platform=x64 -p:platformToolset=v142
+
+    - name: Get current time
+      uses: josStorer/get-current-time@v2.0.2
+      id: current-time
+      with:
+        format: YYYYMMDD_HHmmss
+        utcOffset: "+08:00"
+      
+    - name : Upload artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: x64_lite_${{ steps.current-time.outputs.formattedTime }}_TrafficMonitor
+        path: |
+          Bin/x64/Release (lite)/TrafficMonitor.exe
+          Bin/x64/Release (lite)/*.dll
+
+    - name : Upload pdb files
+      uses: actions/upload-artifact@v3
+      with:
+        name: x64_lite_${{ steps.current-time.outputs.formattedTime }}_pdb
+        path: Bin/x64/Release (lite)/*.pdb
+
+  x86_build:
+    runs-on: windows-latest
+
+    steps:
+    - name: Checkout local translate
+      uses: actions/checkout@v3
+      with:
+        repository: 'yhdsl/TrafficMonitor-Fix'
+        path: './translate'
+  
+    - name: Checkout translator tool
+      uses: actions/checkout@v3
+      with:
+        repository: 'yhdsl/Translator-Tool'
+        path: './tool'
+
+    - name: Checkout TrafficMonitor source code
+      uses: actions/checkout@v3
+      with:
+        repository: 'zhongyang219/TrafficMonitor'
+        path: './traffic_monitor'
+
+    - name: Setup Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.10'
+
+    - name: Run translator tool
+      run: python ./tool/translator.py ./translate/rules -r "$(pwd)/traffic_monitor"
+
+    - name: Add msbuild to PATH
+      uses: microsoft/setup-msbuild@v1.1.3
+      
+    - name: Run msbuild
+      run: |
+         cp -r ./traffic_monitor/* .
+         msbuild -p:configuration=release -p:platform=x86 -p:platformToolset=v142
+
+    - name: Get current time
+      uses: josStorer/get-current-time@v2.0.2
+      id: current-time
+      with:
+        format: YYYYMMDD_HHmmss
+        utcOffset: "+08:00"
+      
+    - name : Upload artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: x86_${{ steps.current-time.outputs.formattedTime }}_TrafficMonitor
+        path: |
+          Bin/x86/Release/TrafficMonitor.exe
+          Bin/x86/Release/*.dll
+
+    - name : Upload pdb files
+      uses: actions/upload-artifact@v3
+      with:
+        name: x86_${{ steps.current-time.outputs.formattedTime }}_pdb
+        path: Bin/x86/Release/*.pdb
+
+  x86_lite_build:
+    runs-on: windows-latest
+
+    steps:
+    - name: Checkout local translate
+      uses: actions/checkout@v3
+      with:
+        repository: 'yhdsl/TrafficMonitor-Fix'
+        path: './translate'
+  
+    - name: Checkout translator tool
+      uses: actions/checkout@v3
+      with:
+        repository: 'yhdsl/Translator-Tool'
+        path: './tool'
+
+    - name: Checkout TrafficMonitor source code
+      uses: actions/checkout@v3
+      with:
+        repository: 'zhongyang219/TrafficMonitor'
+        path: './traffic_monitor'
+
+    - name: Setup Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.10'
+
+    - name: Run translator tool
+      run: python ./tool/translator.py ./translate/rules -r "$(pwd)/traffic_monitor"
+
+    - name: Copy build file
+      run: cp -r ./translate/TrafficMonitor/* ./traffic_monitor/
+
+    - name: Add msbuild to PATH
+      uses: microsoft/setup-msbuild@v1.1.3
+      
+    - name: Run msbuild
+      run: |
+         cp -r ./traffic_monitor/* .
+         msbuild -p:configuration="Release (lite)" -p:platform=x86 -p:platformToolset=v142
+
+    - name: Get current time
+      uses: josStorer/get-current-time@v2.0.2
+      id: current-time
+      with:
+        format: YYYYMMDD_HHmmss
+        utcOffset: "+08:00"
+      
+    - name : Upload artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: x86_lite_${{ steps.current-time.outputs.formattedTime }}_TrafficMonitor
+        path: |
+          Bin/x86/Release (lite)/TrafficMonitor.exe
+          Bin/x86/Release (lite)/*.dll
+
+    - name : Upload pdb files
+      uses: actions/upload-artifact@v3
+      with:
+        name: x86_lite_${{ steps.current-time.outputs.formattedTime }}_pdb
+        path: Bin/x86/Release (lite)/*.pdb
