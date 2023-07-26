@@ -1,7 +1,7 @@
 ## No Gitee!
 修改 TrafficMonitor，
-使其在简体中文环境中不缩短 Gitee 为更新源，
-并且帮助页面还原为 Github
+使其在简体中文环境中不锁定选择 Gitee 为更新源，
+并将帮助页面还原为 Github
 
 ## 使用方法
 
