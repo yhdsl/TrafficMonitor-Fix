@@ -1,0 +1,7 @@
+@AUTHOR=YHDSL
+@VERSION=1.0.0
+@TARGET=./TrafficMonitor/TrafficMonitor.cpp
+@DELIMITER=|
+
+# 禁止跳转 Gitee
+m_general_data.update_source = ini.GetInt(L"general", L"update_source", is_chinese_language ? 1 : 0);|
