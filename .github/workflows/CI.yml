@@ -176,14 +176,14 @@ jobs:
       with:
         name: x86_${{ steps.current-time.outputs.formattedTime }}_TrafficMonitor
         path: |
-          Bin/x86/Release/TrafficMonitor.exe
-          Bin/x86/Release/*.dll
+          Bin/Release/TrafficMonitor.exe
+          Bin/Release/*.dll
 
     - name : Upload pdb files
       uses: actions/upload-artifact@v3
       with:
         name: x86_${{ steps.current-time.outputs.formattedTime }}_pdb
-        path: Bin/x86/Release/*.pdb
+        path: Bin/Release/*.pdb
 
   x86_lite_build:
     runs-on: windows-latest
@@ -238,11 +238,11 @@ jobs:
       with:
         name: x86_lite_${{ steps.current-time.outputs.formattedTime }}_TrafficMonitor
         path: |
-          Bin/x86/Release (lite)/TrafficMonitor.exe
-          Bin/x86/Release (lite)/*.dll
+          Bin/Release (lite)/TrafficMonitor.exe
+          Bin/Release (lite)/*.dll
 
     - name : Upload pdb files
       uses: actions/upload-artifact@v3
       with:
         name: x86_lite_${{ steps.current-time.outputs.formattedTime }}_pdb
-        path: Bin/x86/Release (lite)/*.pdb
+        path: Bin/Release (lite)/*.pdb
