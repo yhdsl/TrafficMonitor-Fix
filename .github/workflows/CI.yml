@@ -10,33 +10,33 @@ jobs:
 
     steps:
     - name: Checkout local translate
-      uses: actions/checkout@v4
+      uses: actions/checkout@v6
       with:
         repository: 'yhdsl/TrafficMonitor-Fix'
         path: './translate'
   
     - name: Checkout translator tool
-      uses: actions/checkout@v4
+      uses: actions/checkout@v6
       with:
         repository: 'yhdsl/Translator-Tool'
         path: './tool'
 
     - name: Checkout TrafficMonitor source code
-      uses: actions/checkout@v4
+      uses: actions/checkout@v6
       with:
         repository: 'zhongyang219/TrafficMonitor'
         path: './traffic_monitor'
 
     - name: Setup Python
-      uses: actions/setup-python@v5
+      uses: actions/setup-python@v6
       with:
-        python-version: '3.10'
+        python-version: '3.14'
 
     - name: Run translator tool
       run: python ./tool/translator.py ./translate/rules -r "$(pwd)/traffic_monitor"
 
     - name: Add msbuild to PATH
-      uses: microsoft/setup-msbuild@v2
+      uses: microsoft/setup-msbuild@v3
       
     - name: Run msbuild
       run: |
@@ -51,7 +51,7 @@ jobs:
         utcOffset: "+08:00"
       
     - name : Upload artifact
-      uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@v7
       with:
         name: x64_${{ steps.current-time.outputs.formattedTime }}_TrafficMonitor
         path: |
@@ -59,7 +59,7 @@ jobs:
           Bin/x64/Release/*.dll
 
     - name : Upload pdb files
-      uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@v7
       with:
         name: x64_${{ steps.current-time.outputs.formattedTime }}_pdb
         path: Bin/x64/Release/*.pdb
@@ -69,27 +69,27 @@ jobs:
 
     steps:
     - name: Checkout local translate
-      uses: actions/checkout@v4
+      uses: actions/checkout@v6
       with:
         repository: 'yhdsl/TrafficMonitor-Fix'
         path: './translate'
   
     - name: Checkout translator tool
-      uses: actions/checkout@v4
+      uses: actions/checkout@v6
       with:
         repository: 'yhdsl/Translator-Tool'
         path: './tool'
 
     - name: Checkout TrafficMonitor source code
-      uses: actions/checkout@v4
+      uses: actions/checkout@v6
       with:
         repository: 'zhongyang219/TrafficMonitor'
         path: './traffic_monitor'
 
     - name: Setup Python
-      uses: actions/setup-python@v5
+      uses: actions/setup-python@v6
       with:
-        python-version: '3.10'
+        python-version: '3.14'
 
     - name: Run translator tool
       run: python ./tool/translator.py ./translate/rules -r "$(pwd)/traffic_monitor"
@@ -98,7 +98,7 @@ jobs:
       run: cp -r ./translate/TrafficMonitor/* ./traffic_monitor/
 
     - name: Add msbuild to PATH
-      uses: microsoft/setup-msbuild@v2
+      uses: microsoft/setup-msbuild@v3
       
     - name: Run msbuild
       run: |
@@ -113,7 +113,7 @@ jobs:
         utcOffset: "+08:00"
       
     - name : Upload artifact
-      uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@v7
       with:
         name: x64_lite_${{ steps.current-time.outputs.formattedTime }}_TrafficMonitor
         path: |
@@ -121,7 +121,7 @@ jobs:
           Bin/x64/Release (lite)/*.dll
 
     - name : Upload pdb files
-      uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@v7
       with:
         name: x64_lite_${{ steps.current-time.outputs.formattedTime }}_pdb
         path: Bin/x64/Release (lite)/*.pdb
@@ -131,33 +131,33 @@ jobs:
 
     steps:
     - name: Checkout local translate
-      uses: actions/checkout@v4
+      uses: actions/checkout@v6
       with:
         repository: 'yhdsl/TrafficMonitor-Fix'
         path: './translate'
   
     - name: Checkout translator tool
-      uses: actions/checkout@v4
+      uses: actions/checkout@v6
       with:
         repository: 'yhdsl/Translator-Tool'
         path: './tool'
 
     - name: Checkout TrafficMonitor source code
-      uses: actions/checkout@v4
+      uses: actions/checkout@v6
       with:
         repository: 'zhongyang219/TrafficMonitor'
         path: './traffic_monitor'
 
     - name: Setup Python
-      uses: actions/setup-python@v5
+      uses: actions/setup-python@v6
       with:
-        python-version: '3.10'
+        python-version: '3.14'
 
     - name: Run translator tool
       run: python ./tool/translator.py ./translate/rules -r "$(pwd)/traffic_monitor"
 
     - name: Add msbuild to PATH
-      uses: microsoft/setup-msbuild@v2
+      uses: microsoft/setup-msbuild@v3
       
     - name: Run msbuild
       run: |
@@ -172,7 +172,7 @@ jobs:
         utcOffset: "+08:00"
       
     - name : Upload artifact
-      uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@v7
       with:
         name: x86_${{ steps.current-time.outputs.formattedTime }}_TrafficMonitor
         path: |
@@ -180,7 +180,7 @@ jobs:
           Bin/Release/*.dll
 
     - name : Upload pdb files
-      uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@v7
       with:
         name: x86_${{ steps.current-time.outputs.formattedTime }}_pdb
         path: Bin/Release/*.pdb
@@ -190,27 +190,27 @@ jobs:
 
     steps:
     - name: Checkout local translate
-      uses: actions/checkout@v4
+      uses: actions/checkout@v6
       with:
         repository: 'yhdsl/TrafficMonitor-Fix'
         path: './translate'
   
     - name: Checkout translator tool
-      uses: actions/checkout@v4
+      uses: actions/checkout@v6
       with:
         repository: 'yhdsl/Translator-Tool'
         path: './tool'
 
     - name: Checkout TrafficMonitor source code
-      uses: actions/checkout@v4
+      uses: actions/checkout@v6
       with:
         repository: 'zhongyang219/TrafficMonitor'
         path: './traffic_monitor'
 
     - name: Setup Python
-      uses: actions/setup-python@v5
+      uses: actions/setup-python@v6
       with:
-        python-version: '3.10'
+        python-version: '3.14'
 
     - name: Run translator tool
       run: python ./tool/translator.py ./translate/rules -r "$(pwd)/traffic_monitor"
@@ -219,7 +219,7 @@ jobs:
       run: cp -r ./translate/TrafficMonitor/* ./traffic_monitor/
 
     - name: Add msbuild to PATH
-      uses: microsoft/setup-msbuild@v2
+      uses: microsoft/setup-msbuild@v3
       
     - name: Run msbuild
       run: |
@@ -234,7 +234,7 @@ jobs:
         utcOffset: "+08:00"
       
     - name : Upload artifact
-      uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@v7
       with:
         name: x86_lite_${{ steps.current-time.outputs.formattedTime }}_TrafficMonitor
         path: |
@@ -242,7 +242,7 @@ jobs:
           Bin/Release (lite)/*.dll
 
     - name : Upload pdb files
-      uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@v7
       with:
         name: x86_lite_${{ steps.current-time.outputs.formattedTime }}_pdb
         path: Bin/Release (lite)/*.pdb
