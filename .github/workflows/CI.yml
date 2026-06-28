@@ -6,7 +6,7 @@ on:
 
 jobs:
   x64_build:
-    runs-on: windows-latest
+    runs-on: windows-2022
 
     steps:
     - name: Checkout local translate
@@ -65,7 +65,7 @@ jobs:
         path: Bin/x64/Release/*.pdb
 
   x64_lite_build:
-    runs-on: windows-latest
+    runs-on: windows-2022
 
     steps:
     - name: Checkout local translate
@@ -127,7 +127,7 @@ jobs:
         path: Bin/x64/Release (lite)/*.pdb
 
   x86_build:
-    runs-on: windows-latest
+    runs-on: windows-2022
 
     steps:
     - name: Checkout local translate
@@ -186,7 +186,7 @@ jobs:
         path: Bin/Release/*.pdb
 
   x86_lite_build:
-    runs-on: windows-latest
+    runs-on: windows-2022
 
     steps:
     - name: Checkout local translate
